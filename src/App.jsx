@@ -80,8 +80,11 @@ function App() {
       <div className="d-flex gap-10">
         <div className="totalScore">
           <h3>Mines Game</h3>
-          <p>Your score: {totalScore}</p>
-          {gameOver && <p style={{color: "red"}}>You lose game over...</p>}
+          {gameOver ? (
+            <p style={{ color: "red" }}>You lose game over...</p>
+          ) : (
+            <p>Your score: {totalScore}</p>
+          )}
           <p>Total Score</p>
           <p class="point">{score}</p>
           <p>Set Difficulity</p>
