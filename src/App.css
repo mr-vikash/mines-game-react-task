@@ -30,6 +30,7 @@ body{
   background-color: #292a2b;
   padding: 20px;
   border-radius: 15px;
+  padding-bottom: 0px;
 }
 
 .checkout-button{
@@ -40,7 +41,14 @@ body{
   color: black
 }
 
-
+h3{
+  margin: 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: linear-gradient(45deg, #0dec0d, #ff7300, #7bff00);
+  -webkit-background-clip: text;
+  color: transparent;
+}
 
 p{
   font-size: 38px;
@@ -59,17 +67,12 @@ p{
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.button-item{
+ display: flex;
+ flex-direction: row;
+ margin: 40px;
+ text-align: center;
+ justify-content: space-between;
 }
 
 @keyframes logo-spin {

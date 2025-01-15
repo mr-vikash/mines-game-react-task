@@ -20,22 +20,20 @@ function App() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    if (!replay) {
-      const squares = [];
-      for (let index = 1; index < 26; index++) {
-        squares.push(
-          <Square
-            setScore={setScore}
-            gameOver={gameOver}
-            setGameOver={setGameOver}
-            mine={randomNumbers.includes(index)}
-            key={index}
-            replay={replay}
-          />
-        );
-      }
-      setItems(squares);
+    const squares = [];
+    for (let index = 1; index < 26; index++) {
+      squares.push(
+        <Square
+          setScore={setScore}
+          gameOver={gameOver}
+          setGameOver={setGameOver}
+          mine={randomNumbers.includes(index)}
+          key={index}
+          replay={replay}
+        />
+      );
     }
+    setItems(squares);
   }, [replay, randomNumbers, gameOver]);
 
   useEffect(() => {
@@ -55,8 +53,15 @@ function App() {
   }, [bombCount]);
 
   const restartGame = () => {
+    const numbers = [];
+    while (numbers.length < bombCount) {
+      let randomNumber = getRandomInt(1, 25);
+      if (!numbers.includes(randomNumber)) {
+        numbers.push(randomNumber);
+      }
+    }
+    setRandomNumbers(numbers);
     setReplay(true);
-    setRandomNumbers([]);
     setItems([]);
     setScore(0);
     setBombCount(3);
@@ -74,15 +79,18 @@ function App() {
     <>
       <div className="d-flex gap-10">
         <div className="totalScore">
+          <h3>Mines Game</h3>
           <p>Your score: {totalScore}</p>
           {gameOver && <p>You lose game over...</p>}
-          <p>Mines Game</p>
           <p>Total Score</p>
           <p class="point">{score}</p>
           <p>Set Difficulity</p>
           <InputBar setBombCount={setBombCount} bombCount={bombCount} />
           <p>Difficulity: {bombCount}</p>
-          <Button name="Checkout" onClick={handleCheckout} />
+          <div className="button-item">
+            <Button name="Checkout" onClick={handleCheckout} />
+            <Button name="replay" onClick={restartGame} />
+          </div>
         </div>
         <div className="parent">
           <div className="d-grid">{items}</div>
@@ -91,9 +99,7 @@ function App() {
               marginTop: "20px",
               justifyContent: "center",
             }}
-          >
-            <Button name="replay" onClick={restartGame} />
-          </div>
+          ></div>
         </div>
       </div>
     </>
